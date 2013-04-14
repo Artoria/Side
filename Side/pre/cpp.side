@@ -1,0 +1,22 @@
+' textfield_key.ico
+' New\C++ ¿Õ¹¤³Ì
+for i = 1 to 100000
+  mydir= [File.dirname](argv(0)) + "\project" & i
+  if not [exist?](myfile) then
+    exit for
+  end if
+next
+
+
+mkdir mydir
+mkdir mydir & "\.side"
+write mydir & "\.side\.file", "cpp"
+write mydir & "\main.cpp", mklines(array( _
+   "#include <stdio.h>" ,_
+   "int main(){" ,_
+   "  return 0;",_
+   "}"_
+))
+
+
+

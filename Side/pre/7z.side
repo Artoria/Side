@@ -1,0 +1,7 @@
+' textfield_key.ico
+' New\7Z Ñ¹ËõÎÄ¼ş
+name = [File.basename 2](argv(0), ".*")
+z7  = [string]([File.dirname](argv(0)) + "\" + name + ".7z")
+fl = [string](argv(0))
+a = [string](root + "\bin\7zip\7z.exe")
+system a +  " a " + z7 + " " + fl + " & pause " 

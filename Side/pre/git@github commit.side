@@ -1,0 +1,9 @@
+' github.ico
+' Cowork\git@github\提交(commit)
+chdir = "cmd /c cd /d " + [File.dirname](argv(0))
+if msgbox("添加所有未追踪的文件吗?", vbYesNo + 32, "remote add") = vbYes then
+ msgbox [`](chdir + " & git add *")
+end if
+
+system chdir + " & notepad .side\message.txt"
+msgbox [`](chdir + " & git commit -F .side\message.txt")

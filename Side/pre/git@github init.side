@@ -1,0 +1,17 @@
+' github.ico
+' Cowork\git@github\初始化(init)
+if msgbox("还要同时添加远程repo吗?", vbYesNo + 32, "remote add") = vbYes then
+  v = inputbox("远程repo，以点分割短名称，用户名和Repo", "添加远程repo", "origin.Artoria.Side")
+else
+  v = ""
+end if
+chdir = "cmd /c cd /d " + [File.dirname](argv(0)) 
+system chdir + " & git init"
+if v  <> "" then
+  x = split(v, ".")
+  system chdir + " & git remote add " + x(0) + " https://github.com/" + x(1) + "/" + x(2)
+end if
+
+mkdir [File.dirname](argv(0)) + "\.side"
+
+

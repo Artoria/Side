@@ -1,0 +1,33 @@
+' android.ico
+' New\APK 空工程
+for i = 1 to 100000
+  mydir= [File.dirname](argv(0)) + "\project" & i
+  if not [exist?](mydir) then
+    exit for
+  end if
+next
+
+v = inputbox("输入包名如com.sample.package", "输入包名", "com.sample.package")
+
+function mkdircont(a, dir, part)
+  dir = dir + "\" + part
+  mkdir dir
+end function
+
+mkdir mydir
+q = split(v, ".")
+s = mydir + "\src"
+mkdir s
+[each with object] q, s, getref("mkdircont")
+mkdir mydir & "\.side"
+mkdir mydir & "\res"
+mkdir mydir & "\res\drawable"
+mkdir mydir & "\res\layout"
+mkdir mydir & "\res\values"
+mkdir mydir & "\obj"
+mkdir mydir & "\lib"
+mkdir mydir & "\bin"
+mkdir mydir & "\docs"
+write mydir & "\.side\.file", "apk"
+
+load root+"pre\jdk_setting.side"

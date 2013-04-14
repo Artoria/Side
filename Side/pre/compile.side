@@ -1,0 +1,17 @@
+' control_record.ico
+' Build\Брвы
+
+myfile = ""
+if loadlevel = 0 then
+  if argc > 1 then
+    myfile = argv(0)
+  end if
+end if
+
+if myfile <> "" then
+  dir = [File.dirname](myfile)
+  filetype = read(dir + ".side\.file")
+  global "compile_file", [string](dir)
+  load root + "src\compile\." + filetype + ".side"
+end if
+

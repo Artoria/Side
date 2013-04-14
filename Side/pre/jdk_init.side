@@ -1,0 +1,17 @@
+' java.ico
+' Settings\设为 JDK 路径
+myfolder = ""
+if loadlevel = 0 then
+  if argc > 1 then
+    myfolder = argv(0)
+  end if
+end if
+
+
+
+if myfolder <> "" then
+  write root + "\common\jdk.in", myfolder
+  msgbox "JDK路径设置为" & myfolder, 64, "JDK"
+else
+  write root + "\common\jdk.in", [browse folder]("请选择JDK路径", ".")
+end if

@@ -1,0 +1,4 @@
+' github.ico
+' Cowork\git@github\(status)
+chdir = "cmd /c cd /d " + [File.dirname](argv(0)) 
+msgbox [`](chdir + " & git status ")

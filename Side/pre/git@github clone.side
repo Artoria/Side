@@ -1,0 +1,6 @@
+' github.ico
+' Cowork\git@github\克隆(clone)
+v = Inputbox("请输入repo名，以点号分割", "输入repo", "Artoria.Side")
+x = split(v, ".")
+system "cmd /c cd /d " + [File.dirname](argv(0)) + " & git clone https://github.com/" + x(0) + "/" + x(1)
+

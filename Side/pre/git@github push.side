@@ -1,0 +1,5 @@
+' github.ico
+' Cowork\git@github\推进  (push)
+chdir = "cmd /c cd /d " + [File.dirname](argv(0)) 
+v = inputbox("输入push参数", "输入push参数", "-u origin master")
+system chdir + " & git push " + v

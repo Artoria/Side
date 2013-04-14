@@ -1,0 +1,3 @@
+' ..\bin\vim72\gvim.exe, 0
+' Edit\ÓÃ VIM ´ò¿ª
+system "cmd /c start """" " + [string](root + "bin\vim72\gvim.exe") + " " + [string](argv(0))
