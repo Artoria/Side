@@ -1,4 +1,4 @@
-` m.ico
+' m.ico
 ' Settings\ÉèÎª MinGW Â·¾¶
 myfolder = ""
 if loadlevel = 0 then
