@@ -1,0 +1,19 @@
+    6 7z.side
+   32 apk.side
+   25 compile.side
+   22 cpp.side
+   14 env.side
+    8 git init.side
+    6 git@github clone.side
+    8 git@github commit.side
+   17 git@github init.side
+    5 git@github push.side
+    4 git@github status.side
+   16 jdk_init.side
+    4 jdk_setting.side
+    0 m.txt
+   14 mingw_init.side
+    4 mingw_setting.side
+  256 runner.vbs
+    2 vim.side
+  443 total
