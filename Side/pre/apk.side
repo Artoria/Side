@@ -8,7 +8,6 @@ for i = 1 to 100000
 next
 
 v = inputbox("输入包名如com.sample.package", "输入包名", "com.sample.package")
-
 function mkdircont(a, dir, part)
   dir = dir + "\" + part
   mkdir dir
@@ -30,4 +29,4 @@ mkdir mydir & "\bin"
 mkdir mydir & "\docs"
 write mydir & "\.side\.file", "apk"
 
-load root+"pre\jdk_setting.side"
+load localroot+"pre\jdk_setting.side"

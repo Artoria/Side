@@ -103,7 +103,13 @@ function [folder?](a)
 end function
 
 function [exist?](a)
-  [exist?]=[file?](a) or [folder?](a)
+  [exist?] = false
+  if [file?](a) then
+    [exist?] = true
+  end if
+  if [folder?](a) then
+   [exist?]=true
+  end if
 end function
 
 
@@ -251,6 +257,8 @@ global "resource(2052)", ID_HASH
 global "resource(1033)", ID_HASH
 global "currentLocale", "resource(GetUILanguage)"
 global "root", [string](shell.specialFolders("SendTo")+"\Side\") 
+global "localroot", [string](folder("Side").path + "\")  
 global "iconroot", [string](root+"\icon\") 
+global "localiconroot", [string](localroot+"\..\icon\") 
 global "loadlevel", "0"
 ExecuteGlobal read(WScript.Arguments(0))
