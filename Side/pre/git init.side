@@ -1,0 +1,8 @@
+' textfield_key.ico
+' New\GIT ²Ö¿â
+chdir = "cmd /c cd /d " + [File.dirname](argv(0))
+ 
+system chdir + " & git init"
+mkdir [File.dirname](argv(0)) + "\.side"
+
+
