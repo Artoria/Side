@@ -10,8 +10,16 @@ end if
 
 if myfile <> "" then
   dir = [File.dirname](myfile)
-  filetype = read(dir + ".side\.file")
-  global "compile_file", [string](dir)
-  load root + "src\compile\." + filetype + ".side"
+  if [exist?](dir + ".side\.file") then
+    filetype = read(dir + ".side\.file")
+    global "compile_file", [string](dir)
+    if not [exist?](root + "src\compile\." + filetype + ".side")  then
+      msgbox "没有找到类型为'"+filetype+"'的默认编译器"
+    else   
+      load root + "src\compile\." + filetype + ".side"
+    end if
+  else
+      msgbox "没有找到.side\.file目录"
+  end if
 end if
 
