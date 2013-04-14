@@ -27,7 +27,7 @@ function argv(n)
  if n = -1 then
    argv = WScript.ScriptFullName
  else
-   argv = WScript.Arguments(n + 1)
+   argv = WScript.Arguments(n + loadlevel + 1)
  end if
 end function
 
@@ -81,6 +81,10 @@ function readlines(a)
 end function
 
 function strslice(a, b, c)
+  if len(a) = 0 then
+    strslice = ""
+    exit function
+  end if
   dim r, s : r = b: s = c
   r = r mod len(a)
   if r < 0 then 
@@ -171,6 +175,10 @@ end function
 
 
 function substr(a, b, c)
+  if len(a) = 0 then
+    strslice = ""
+    exit function
+  end if
   dim r, s : r = b: s = c
   r = r mod len(a)
   if r < 0 then 

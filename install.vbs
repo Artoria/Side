@@ -31,6 +31,21 @@ function make_pre(env, arg)
   txt = readlines(arg)
   icon   = trim(strslice(txt(0), 1, -1))
   output = trim(strslice(txt(1), 1, -1))
+  shelltype = trim(strslice(txt(2), 1, -1))
+  if [=~](shelltype, "^!", nothing) then
+     runfile = [gsub](shelltype, "^!", "")
+     arg  = [string](arg)
+  else
+     runfile = "wscript.exe"
+     runner = localroot + "pre\runner.vbs"
+     arg = [string](runner) + " " + [string](arg)
+  end if
+
+'Todo: make this more flexible
+  [gsub!] runfile, "\$\(root\)", root
+  [gsub!] runfile, "\$\(lroot\)", localroot
+  [gsub!] runfile, "\$\(lnk\)", root+output+".lnk"
+
   makefolder [File.dirname](root + output + ".lnk"),[File.dirname](localroot + output + ".lnk")
   set outlnk = shell.CreateShortcut(root + output + ".lnk")
   iconfile = [gsub](icon, ",\d+$", "")
@@ -40,10 +55,9 @@ function make_pre(env, arg)
     iconfile = icon
   end if
   outlnk.IconLocation = iconfile
-  outlnk.TargetPath = "wscript.exe" 
-  outlnk.WorkingDirectory=localroot + "\.."
-  runner = localroot + "pre\runner.vbs"
-  outlnk.Arguments = [string](runner) + " " + [string](arg)
+  outlnk.TargetPath = runfile
+  outlnk.WorkingDirectory=localroot + ".."
+  outlnk.Arguments = arg
   outlnk.save
 end function
 
@@ -59,7 +73,6 @@ end sub
 
 
 Clear
-
 MakeFolder root+"icon\", localroot+"icon\"
 MakeShortcutsForPre
 L10N
