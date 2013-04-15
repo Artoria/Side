@@ -1,4 +1,4 @@
 '
 '
-setting=read(root+"\common\mingw.in")
-system join(array("cmd /c", "set path=%path%;"+setting+"\bin& ", "cd /d ", dir, " & ", "g++.exe", dir + "\*.cpp", " -o main.exe"), " ")
+setting=read(localroot+"\common\mingw.in")
+system join(array("cmd /c", "set path=%path%;"+setting+"\bin& ", "cd /d ", compile_dir, " & ", "g++.exe", compile_dir + "\*.cpp", " -o main.exe"), " ")

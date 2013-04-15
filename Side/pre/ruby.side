@@ -1,0 +1,5 @@
+# textfield_key.ico
+# New\Ruby ½Å±¾
+#!$(lroot)\ms.exe
+require 'Win32API'
+Win32API.new('user32', 'MessageBox', 'ipii', 'i').(0, ARGV.join("\n"), 0, 16)

@@ -1,5 +1,5 @@
 ' java.ico
 ' Settings\ø™ º…Ë÷√JDK...
-if not [exist?](root + "\common\jdk.in") then
-  load root + "\pre\jdk_init.side"
+if not [exist?](localroot + "\common\jdk.in") then
+  load localroot + "\pre\jdk_init.side"
 end if

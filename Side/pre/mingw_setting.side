@@ -1,5 +1,5 @@
 ' m.ico
 ' Settings\ø™ º…Ë÷√MinGW...
-if not [exist?](root + "\common\mingw.in") then
-  load root + "\Settings\mingw_init.side"
+if not [exist?](localroot + "\common\mingw.in") then
+  load localroot + "\Settings\mingw_init.side"
 end if

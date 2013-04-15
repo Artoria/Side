@@ -27,7 +27,7 @@ function argv(n)
  if n = -1 then
    argv = WScript.ScriptFullName
  else
-   argv = WScript.Arguments(n + 1)
+   argv = WScript.Arguments(n + loadlevel + 1)
  end if
 end function
 
@@ -81,6 +81,10 @@ function readlines(a)
 end function
 
 function strslice(a, b, c)
+  if len(a) = 0 then
+    strslice = ""
+    exit function
+  end if
   dim r, s : r = b: s = c
   r = r mod len(a)
   if r < 0 then 
@@ -103,7 +107,13 @@ function [folder?](a)
 end function
 
 function [exist?](a)
-  [exist?]=[file?](a) or [folder?](a)
+  [exist?] = false
+  if [file?](a) then
+    [exist?] = true
+  end if
+  if [folder?](a) then
+   [exist?]=true
+  end if
 end function
 
 
@@ -165,6 +175,10 @@ end function
 
 
 function substr(a, b, c)
+  if len(a) = 0 then
+    strslice = ""
+    exit function
+  end if
   dim r, s : r = b: s = c
   r = r mod len(a)
   if r < 0 then 
@@ -251,6 +265,8 @@ global "resource(2052)", ID_HASH
 global "resource(1033)", ID_HASH
 global "currentLocale", "resource(GetUILanguage)"
 global "root", [string](shell.specialFolders("SendTo")+"\Side\") 
+global "localroot", [string](folder("Side").path + "\")  
 global "iconroot", [string](root+"\icon\") 
+global "localiconroot", [string](localroot+"\..\icon\") 
 global "loadlevel", "0"
 ExecuteGlobal read(WScript.Arguments(0))

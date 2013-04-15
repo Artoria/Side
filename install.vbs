@@ -4,13 +4,18 @@ global "shell",  [class]("WScript.Shell")
 global "resource", ID_HASH
 global "resource(2052)", ID_HASH
 global "resource(1033)", ID_HASH
-global "root", [string](shell.specialFolders("SendTo")+"\Side\") 
-global "iconroot", [string](root+"\icon\") 
-global "localiconroot", [string]("icon\")
 
-sub CopyMain
-  Copy folder(".\Side").path, specialFolder(ID_SENDTO)
-end sub
+
+function makefolder(a, b)
+  if not [exist?](a) then
+    if not [exist?]([File.dirname](a)) then
+     makefolder [File.dirname](a), [File.dirname](b)
+    end if
+    if [exist?](b) then
+      fso.CopyFolder strslice(b,0,-2), strslice(a,0,-2), true
+    end if
+  end if
+end function
 
 sub L10N
   global "currentLocale", "resource(GetUILanguage)"
@@ -26,20 +31,38 @@ function make_pre(env, arg)
   txt = readlines(arg)
   icon   = trim(strslice(txt(0), 1, -1))
   output = trim(strslice(txt(1), 1, -1))
+  shelltype = trim(strslice(txt(2), 1, -1))
+  if [=~](shelltype, "^!", nothing) then
+     runfile = [gsub](shelltype, "^!", "")
+     arg  = [string](arg)
+  else
+     runfile = "wscript.exe"
+     runner = localroot + "pre\runner.vbs"
+     arg = [string](runner) + " " + [string](arg)
+  end if
+
+'Todo: make this more flexible
+  [gsub!] runfile, "\$\(root\)", root
+  [gsub!] runfile, "\$\(lroot\)", localroot
+  [gsub!] runfile, "\$\(lnk\)", root+output+".lnk"
+
+  makefolder [File.dirname](root + output + ".lnk"),[File.dirname](localroot + output + ".lnk")
   set outlnk = shell.CreateShortcut(root + output + ".lnk")
   iconfile = [gsub](icon, ",\d+$", "")
-  if [=~](iconfile, "\.ico$", nothing) then
-    fso.CopyFile localiconroot + iconfile,iconroot + iconfile
+  if [=~](iconfile, "\.ico$", nothing) then 
+    iconfile = localiconroot + iconfile
+  else
+    iconfile = icon
   end if
-  outlnk.IconLocation = iconroot + icon
-  outlnk.TargetPath = "wscript.exe" 
-  runner = root + "pre\runner.vbs"
-  outlnk.Arguments = [string](runner) + " " + [string](arg)
+  outlnk.IconLocation = iconfile
+  outlnk.TargetPath = runfile
+  outlnk.WorkingDirectory=localroot + ".."
+  outlnk.Arguments = arg
   outlnk.save
 end function
 
 sub MakeShortcutsForPre
-  [each] fso.Getfolder(root+"pre").Files, getref("make_pre")
+  [each] fso.Getfolder(localroot+"pre").Files, getref("make_pre")
 end sub
 
 sub Clear
@@ -49,14 +72,7 @@ sub Clear
 end sub
 
 
-if (argc > 1) then
-  if argv(0) <> "-nocopy" then
-     Clear
-     CopyMain
-  end if
-else
-  Clear
-  CopyMain
-end if
+Clear
+MakeFolder root+"icon\", localroot+"icon\"
 MakeShortcutsForPre
 L10N
