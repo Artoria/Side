@@ -76,6 +76,17 @@ function write(a, b)
   f.Close
 end function
 
+function append(a, b)
+  dim f
+  if not [exist?](a) then
+    write a,b
+  else
+    set f = fso.Getfile(a).OpenAsTextStream(8)
+    call f.Write(b)
+    f.Close
+  end if
+end function
+
 function readlines(a)
   readlines = split(read(a), vbcrlf)
 end function

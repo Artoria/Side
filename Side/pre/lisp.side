@@ -1,0 +1,6 @@
+; textfield_key.ico
+; New\LISP ≤‚ ‘
+; !clisp 
+
+(format 't "Hello world~%")
+(loop while (lambda()()) do ())

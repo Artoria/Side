@@ -2,7 +2,7 @@ if GetUILanguage = 2052 then
  with currentLocale
   .Add "Donation", "捐助"
   .Add "Schedule", "计划"
-  .Add "Social", "社交"
+  .Add "Social", "分享"
   .Add "Mode", "开发模式"
   .Add "Cowork", "协作"
   .Add "Build", "构建"

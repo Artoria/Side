@@ -1,6 +1,7 @@
 @echo off
 setlocal
 pushd %~dp0
+del output.vim
 cscript /nologo Side\pre\runner.vbs install.vbs
 pushd %userprofile%\SendTo\Side
 attrib /d /s +r "%userprofile%\SendTo\Side"

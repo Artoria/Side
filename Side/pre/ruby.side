@@ -1,5 +1,20 @@
 # textfield_key.ico
 # New\Ruby ½Å±¾
-#!$(lroot)\ms.exe
-require 'Win32API'
-Win32API.new('user32', 'MessageBox', 'ipii', 'i').(0, ARGV.join("\n"), 0, 16)
+# !rubyw.exe
+
+AEIOU = [?a, ?e, ?i, ?o, ?u]
+BCXYZ = [*?a..?z] - AEIOU
+def filename
+ AEIOU.sample + BCXYZ.sample +  AEIOU.sample + BCXYZ.sample +  AEIOU.sample
+end
+
+def avail
+ loop do
+  x = filename + ".rb"
+  return x if !FileTest.exists?(x)
+ end 
+end
+
+open(name = avail, "w"){|f| f.write "puts 'Hello world'"}
+system 'cmd /c start "" notepad ' + name
+ 

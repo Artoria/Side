@@ -1,0 +1,12 @@
+" textfield_key.ico
+" New\从剪贴板新建
+" !$(localroot)\..\..\bin\vim72\gvim.exe
+" !+"so $(file) "
+
+cd %:p:h
+e nul
+try
+ norm "+p
+catch
+ echo "剪贴板为空"
+endtry

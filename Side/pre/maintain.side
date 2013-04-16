@@ -1,0 +1,3 @@
+' folder_wrench.ico
+' Settings\打开维护目录
+system "explorer.exe /n,/e,/root," + [string](root)
